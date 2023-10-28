@@ -1,11 +1,16 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-// Include any necessary libraries here
+/* Include any necessary libraries here */
+#ifdef __cplusplus
+#include <cstdint>
+#else
+#include <stdint.h>
+#endif
 
-// Declare any constants or global variables here
+/* Declare any constants or global variables here */
 
-// Declare any function prototypes here
+/* Declare any function prototypes here */
 #ifndef MAX
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #endif

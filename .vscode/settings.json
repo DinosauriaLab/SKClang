@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "**/frontmatter.json": "jsonc",
+        "**/.frontmatter/config/*.json": "jsonc",
+        "*.cfg": "cpp",
+        ".env*": "dotenv",
+        "cstdint": "cpp"
+    }
+}
