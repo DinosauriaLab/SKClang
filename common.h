@@ -17,7 +17,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -76,11 +78,25 @@ extern "C" {
 #endif
 
 /* Clock */
-#define SEC_TO_MSEC(x) ((x) * 1000)
-#define SEC_TO_USEC(x) ((x) * 1000000)
+#define MSEC_TO_USEC(x) ((x) * 1000)     // millisecond to microsecond
+#define SEC_TO_MSEC(x)  ((x) * 1000)     // second to millisecond
+#define SEC_TO_USEC(x)  ((x) * 1000000)  // second to microsecond
 
+// Assume the prototype of CLK_SysTickDelay function is as follows.
 // extern int32_t CLK_SysTickDelay(uint32_t us);
-#define delay_us(x) CLK_SysTickDelay(x)
+
+#define MAX_DELAY_US    (349525)
+#define delay_us(x)                         \
+    do {                                    \
+        uint32_t _x = (x);                  \
+        while (_x > MAX_DELAY_US) {         \
+            CLK_SysTickDelay(MAX_DELAY_US); \
+            _x -= MAX_DELAY_US;             \
+        }                                   \
+        CLK_SysTickDelay(_x);               \
+    } while (0)
+#define delay_ms(x)  delay_us(MSEC_TO_USEC(x))
+#define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
 
 /* Exported functions prototypes ---------------------------------------------*/
 
