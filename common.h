@@ -1,16 +1,35 @@
-#ifndef COMMON_H
-#define COMMON_H
+/**
+ * @file common.h
+ * @author leoli (jafee201153@gmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-09-19
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
 
-/* Include any necessary libraries here */
+#ifndef __COMMON_H
+#define __COMMON_H
+
 #ifdef __cplusplus
-#include <cstdint>
-#else
-#include <stdint.h>
+extern "C" {
 #endif
 
-/* Declare any constants or global variables here */
+/* Includes ------------------------------------------------------------------*/
+#include <stdint.h>
 
-/* Declare any function prototypes here */
+/* Exported types ------------------------------------------------------------*/
+
+/* Exported constants --------------------------------------------------------*/
+
+/* Exported macro ------------------------------------------------------------*/
+
+/* Utils */
+#define BUILD_DATE_TIME (__DATE__ " @ " __TIME__)  // "Sep 21 2018 @ 11:00:00"
+#define HEX2ASCII(x)    ((x) < 10 ? (x) + '0' : (x)-10 + 'A')
+
+/* Math */
 #ifndef MAX
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #endif
@@ -33,11 +52,11 @@
 
 #ifndef SWAP
 #define SWAP(a, b) \
-  do {             \
-    a ^= b;        \
-    b ^= a;        \
-    a ^= b;        \
-  } while (0)
+    do {           \
+        a ^= b;    \
+        b ^= a;    \
+        a ^= b;    \
+    } while (0)
 #endif
 
 #ifndef ARRAY_SIZE
@@ -56,6 +75,17 @@
 #define BIT_CLEAR(x, y) ((x) &= ~BIT(y))
 #endif
 
-#define HEX2ASCII(x) ((x) < 10 ? (x) + '0' : (x)-10 + 'A')
+/* Clock */
+#define SEC_TO_MSEC(x) ((x) * 1000)
+#define SEC_TO_USEC(x) ((x) * 1000000)
 
-#endif /* COMMON_H */
+extern int32_t CLK_SysTickDelay(uint32_t us);
+#define delay_us(x) CLK_SysTickDelay(x)
+
+/* Exported functions prototypes ---------------------------------------------*/
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // __COMMON_H
