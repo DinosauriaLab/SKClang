@@ -17,7 +17,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -80,7 +82,7 @@ extern "C" {
 #define SEC_TO_USEC(x) ((x) * 1000000)
 
 // extern int32_t CLK_SysTickDelay(uint32_t us);
-#define delay_us(x) CLK_SysTickDelay(x)
+#define delay_us(x)    CLK_SysTickDelay(x)
 
 /* Exported functions prototypes ---------------------------------------------*/
 
