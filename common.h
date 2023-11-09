@@ -86,7 +86,6 @@ extern "C" {
 // extern int32_t CLK_SysTickDelay(uint32_t us);
 
 #define MAX_DELAY_US    (349525)
-
 #define delay_us(x)                         \
     do {                                    \
         uint32_t _x = (x);                  \
@@ -96,18 +95,8 @@ extern "C" {
         }                                   \
         CLK_SysTickDelay(_x);               \
     } while (0)
-
-#define delay_ms(x)                    \
-    do {                               \
-        uint32_t _x = MSEC_TO_USEC(x); \
-        delay_us(_x);                  \
-    } while (0)
-
-#define delay_sec(x)                  \
-    do {                              \
-        uint32_t _x = SEC_TO_MSEC(x); \
-        delay_ms(_x);                 \
-    } while (0)
+#define delay_ms(x)  delay_us(MSEC_TO_USEC(x))
+#define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
 
 /* Exported functions prototypes ---------------------------------------------*/
 
