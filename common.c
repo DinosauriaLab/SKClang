@@ -73,9 +73,12 @@ __weak int UART_TransmitData(uint8_t data) {
 
 int _write(int fd, char *ptr, int len) {
     (void)fd;
+    (void)ptr;
+#ifdef DEBUG
     for (int i = 0; i < len; i++) {
         UART_TransmitData(ptr[i]);
     }
+#endif
     return len;
 }
 
