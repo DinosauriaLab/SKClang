@@ -21,6 +21,8 @@ extern "C" {
 #include <stdint.h>
 #include <stdio.h>
 
+#include "utility_config.h"
+
 /* Exported types ------------------------------------------------------------*/
 
 /* Exported constants --------------------------------------------------------*/
@@ -82,20 +84,49 @@ extern "C" {
 #define SEC_TO_MSEC(x)  ((x) * 1000)     // second to millisecond
 #define SEC_TO_USEC(x)  ((x) * 1000000)  // second to microsecond
 
+#ifdef __ARM_ARCH
+
 #ifndef MAX_DELAY_US
-#define MAX_DELAY_US (349525)
+#define MAX_DELAY_US (0xFFFFFFFFU)
 #endif
-#define DELAY_US(x)                 \
-    do {                            \
-        uint32_t _x = (x);          \
-        while (_x > MAX_DELAY_US) { \
-            delay_us(MAX_DELAY_US); \
-            _x -= MAX_DELAY_US;     \
-        }                           \
-        delay_us(_x);               \
+
+#ifndef tiny_delay(microseconds)
+#define tiny_delay(microseconds)
+#endif
+
+#define delay_us(x)                   \
+    do {                              \
+        uint32_t _x = (x);            \
+        while (_x > MAX_DELAY_US) {   \
+            tiny_delay(MAX_DELAY_US); \
+            _x -= MAX_DELAY_US;       \
+        }                             \
+        tiny_delay(_x);               \
     } while (0)
-#define DELAY_MS(x)  DELAY_US(MSEC_TO_USEC(x))
-#define DELAY_SEC(x) DELAY_MS(SEC_TO_MSEC(x))
+#define delay_ms(x)  delay_us(MSEC_TO_USEC(x))
+#define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
+
+#ifndef UART_SEND_CHAR
+#define UART_SEND_CHAR(x)
+#endif
+
+#ifdef DEBUG
+static inline int _write(int fd, char *ptr, int len) {
+    (void)fd;
+    for (int i = 0; i < len; i++) {
+        UART_SEND_CHAR(ptr[i]);
+    }
+    return len;
+}
+#else
+static inline int _write(int fd, char *ptr, int len) {
+    (void)fd;
+    (void)ptr;
+    return len;  // 或者返回未使用参数len以避免警告
+}
+#endif  // DEBUG
+
+#endif  // __ARM_ARCH
 
 /* Exported functions prototypes ---------------------------------------------*/
 
