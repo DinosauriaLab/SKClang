@@ -31,7 +31,7 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 
 #define MAX_DELAY_US             0xFFFFFFFF /* Please define the max delay time in us */
-#define tiny_delay(microseconds)            /* Please define the delay function in us */
+#define TINY_DELAY(microseconds)            /* Please define the delay function in us */
 #define UART_SEND_CHAR(x)                   /* Please define the send char function */
 
 /* Exported functions prototypes ---------------------------------------------*/

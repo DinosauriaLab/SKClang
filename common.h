@@ -90,18 +90,18 @@ extern "C" {
 #define MAX_DELAY_US (0xFFFFFFFFU)
 #endif
 
-#ifndef tiny_delay(microseconds)
-#define tiny_delay(microseconds)
+#ifndef TINY_DELAY
+#define TINY_DELAY(microseconds)
 #endif
 
 #define delay_us(x)                   \
     do {                              \
         uint32_t _x = (x);            \
         while (_x > MAX_DELAY_US) {   \
-            tiny_delay(MAX_DELAY_US); \
+            TINY_DELAY(MAX_DELAY_US); \
             _x -= MAX_DELAY_US;       \
         }                             \
-        tiny_delay(_x);               \
+        TINY_DELAY(_x);               \
     } while (0)
 #define delay_ms(x)  delay_us(MSEC_TO_USEC(x))
 #define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
