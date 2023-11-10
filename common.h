@@ -25,58 +25,56 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 
-#define __UART_DEBUG_PORT__ (UART7)
-
 /* Exported macro ------------------------------------------------------------*/
 
 /* Utils */
-#define BUILD_DATE_TIME     (__DATE__ " @ " __TIME__)  // "Sep 21 2018 @ 11:00:00"
-#define HEX2ASCII(x)        ((x) < 10 ? (x) + '0' : (x)-10 + 'A')
+#define BUILD_DATE_TIME (__DATE__ " @ " __TIME__)  // "Sep 21 2018 @ 11:00:00"
+#define HEX2ASCII(x)    ((x) < 10 ? (x) + '0' : (x)-10 + 'A')
 
 /* Math */
 #ifndef MAX
-    #define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 #endif
 
 #ifndef MIN
-    #define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 #endif
 
 #ifndef SQUARE
-    #define SQUARE(a) ((a) * (a))
+#define SQUARE(a) ((a) * (a))
 #endif
 
 #ifndef ABS
-    #define ABS(a) ((a) < 0 ? -(a) : (a))
+#define ABS(a) ((a) < 0 ? -(a) : (a))
 #endif
 
 #ifndef CLAMP
-    #define CLAMP(a, min, max) (MAX(MIN(a, max), min))
+#define CLAMP(a, min, max) (MAX(MIN(a, max), min))
 #endif
 
 #ifndef SWAP
-    #define SWAP(a, b) \
-        do {           \
-            a ^= b;    \
-            b ^= a;    \
-            a ^= b;    \
-        } while (0)
+#define SWAP(a, b) \
+    do {           \
+        a ^= b;    \
+        b ^= a;    \
+        a ^= b;    \
+    } while (0)
 #endif
 
 #ifndef ARRAY_SIZE
-    #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
+#define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #endif
 
 #ifndef BIT
-    #define BIT(x) (1 << (x))
+#define BIT(x) (1 << (x))
 #endif
 
 #ifndef BIT_SET
-    #define BIT_SET(x, y) ((x) |= BIT(y))
+#define BIT_SET(x, y) ((x) |= BIT(y))
 #endif
 
 #ifndef BIT_CLEAR
-    #define BIT_CLEAR(x, y) ((x) &= ~BIT(y))
+#define BIT_CLEAR(x, y) ((x) &= ~BIT(y))
 #endif
 
 /* Clock */
@@ -84,21 +82,20 @@ extern "C" {
 #define SEC_TO_MSEC(x)  ((x) * 1000)     // second to millisecond
 #define SEC_TO_USEC(x)  ((x) * 1000000)  // second to microsecond
 
-// Assume the prototype of CLK_SysTickDelay function is as follows.
-// extern int32_t CLK_SysTickDelay(uint32_t us);
-
-#define MAX_DELAY_US    (349525)
-#define delay_us(x)                         \
-    do {                                    \
-        uint32_t _x = (x);                  \
-        while (_x > MAX_DELAY_US) {         \
-            CLK_SysTickDelay(MAX_DELAY_US); \
-            _x -= MAX_DELAY_US;             \
-        }                                   \
-        CLK_SysTickDelay(_x);               \
+#ifndef MAX_DELAY_US
+#define MAX_DELAY_US (349525)
+#endif
+#define DELAY_US(x)                 \
+    do {                            \
+        uint32_t _x = (x);          \
+        while (_x > MAX_DELAY_US) { \
+            delay_us(MAX_DELAY_US); \
+            _x -= MAX_DELAY_US;     \
+        }                           \
+        delay_us(_x);               \
     } while (0)
-#define delay_ms(x)  delay_us(MSEC_TO_USEC(x))
-#define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
+#define DELAY_MS(x)  DELAY_US(MSEC_TO_USEC(x))
+#define DELAY_SEC(x) DELAY_MS(SEC_TO_MSEC(x))
 
 /* Exported functions prototypes ---------------------------------------------*/
 

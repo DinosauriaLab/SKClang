@@ -44,38 +44,7 @@ extern "C" {
 /* Exported functions --------------------------------------------------------*/
 
 #ifdef __ARM_ARCH
-PUTCHAR_PROTOTYPE {
-    /* Place your implementation of fputc here */
-    /* e.g. write a character to the USART and Loop until the end of transmission */
-    #ifdef DEBUG
-    LL_USART_TransmitData8(__UART_DEBUG_PORT__, ch);
-    while (!LL_USART_IsActiveFlag_TXE(__UART_DEBUG_PORT__))
-        ;
-    #endif
-    return ch;
-}
-int _write(int fd, char *ch, int len) {
-    #ifdef DEBUG
-    while (len--) {
-        LL_USART_TransmitData8(__UART_DEBUG_PORT__, *ch);
-        while (!LL_USART_IsActiveFlag_TXE(__UART_DEBUG_PORT__))
-            ;
-        ch++;
-    }
-    #endif
-    return len;
-}
-int fputc(int ch, FILE *f) {
-    #ifdef DEBUG
-    LL_USART_TransmitData8(__UART_DEBUG_PORT__, (uint8_t *)&ch);
-    while (!LL_USART_IsActiveFlag_TXE(__UART_DEBUG_PORT__))
-        ;
-    #endif
-    return ch;
-}
-
-/* The minimum delay is 5us */
-void DelayUs(uint16_t us) {
+__weak void delay_us(uint16_t us) {
     if (us > 0) {
         uint32_t ticks;
         uint32_t told, tnow, tcnt = 0;
@@ -95,6 +64,21 @@ void DelayUs(uint16_t us) {
         }
     }
 }
+
+__weak int UART_TransmitData(uint8_t data) {
+    LL_USART_TransmitData8(NULL, data);
+    while (!LL_USART_IsActiveFlag_TXE(NULL))
+        ;
+}
+
+int _write(int fd, char *ptr, int len) {
+    (void)fd;
+    for (int i = 0; i < len; i++) {
+        UART_TransmitData(ptr[i]);
+    }
+    return len;
+}
+
 #endif
 
 #ifdef __cplusplus
