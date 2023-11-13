@@ -79,6 +79,17 @@ extern "C" {
 #define BIT_CLEAR(x, y) ((x) &= ~BIT(y))
 #endif
 
+#ifndef CHECKSUM
+#define CHECKSUM(array, length)            \
+    ({                                     \
+        uint8_t sum = 0;                   \
+        for (int i = 0; i < length; i++) { \
+            sum ^= array[i];               \
+        }                                  \
+        sum;                               \
+    })
+#endif
+
 /* Clock */
 #define MSEC_TO_USEC(x) ((x) * 1000)     // millisecond to microsecond
 #define SEC_TO_MSEC(x)  ((x) * 1000)     // second to millisecond
