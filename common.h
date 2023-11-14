@@ -79,12 +79,12 @@ extern "C" {
 #define BIT_CLEAR(x, y) ((x) &= ~BIT(y))
 #endif
 
-#ifndef CHECKSUM
-#define CHECKSUM(array, length)            \
+#ifndef CHECKSUM_ADD
+#define CHECKSUM_ADD(array, length)        \
     ({                                     \
         uint8_t sum = 0;                   \
         for (int i = 0; i < length; i++) { \
-            sum ^= array[i];               \
+            sum += array[i];               \
         }                                  \
         sum;                               \
     })
