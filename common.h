@@ -30,8 +30,10 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 
 /* Utils */
-#define BUILD_DATE_TIME (__DATE__ " @ " __TIME__)  // "Sep 21 2018 @ 11:00:00"
-#define HEX2ASCII(x)    ((x) < 10 ? (x) + '0' : (x)-10 + 'A')
+#define StringTrueFalse(x) ((x) ? "true" : "false")
+
+#define BUILD_DATE_TIME    (__DATE__ " @ " __TIME__)  // "Sep 21 2018 @ 11:00:00"
+#define HEX2ASCII(x)       ((x) < 10 ? (x) + '0' : (x)-10 + 'A')
 
 /* Math */
 #ifndef MAX
@@ -82,7 +84,7 @@ extern "C" {
 #ifndef CHECKSUM_ADD
 #define CHECKSUM_ADD(array, length)        \
     ({                                     \
-        uint8_t sum = 0;                   \
+        uint64_t sum = 0;                  \
         for (int i = 0; i < length; i++) { \
             sum += array[i];               \
         }                                  \
