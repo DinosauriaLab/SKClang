@@ -63,6 +63,29 @@ extern "C" {
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #endif
 
+#ifndef ARRAY_INVERT
+#define ARRAY_INVERT(array, length)                \
+    do {                                           \
+        for (int i = 0; i < length / 2; i++) {     \
+            SWAP(array[i], array[length - i - 1]); \
+        }                                          \
+    } while (0)
+#endif
+
+#ifndef ARRAY_IS_ALL_ZERO
+#define ARRAY_IS_ALL_ZERO(array, length, type)    \
+    ({                                            \
+        bool is_all_zero = true;                  \
+        for (size_t i = 0; i < (length); ++i) {   \
+            if (((type*)(array))[i] != (type)0) { \
+                is_all_zero = false;              \
+                break;                            \
+            }                                     \
+        }                                         \
+        is_all_zero;                              \
+    })
+#endif
+
 #ifndef BIT
 #define BIT(x) (1 << (x))
 #endif
