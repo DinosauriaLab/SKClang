@@ -36,6 +36,13 @@ extern "C" {
 
 #ifdef __ARM_ARCH
 
+#define SYS_TICK_START()      \
+    SysTick->LOAD = 0xFFFFFF; \
+    SysTick->VAL  = 0;        \
+    SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
+#define SYS_TICK_STOP()  (SysTick->CTRL = 0)
+#define SYS_TICK_COUNT() (SysTick->VAL)
+
 #ifndef MAX_DELAY_US
 #define MAX_DELAY_US (0xFFFFFFFFU)
 #endif
