@@ -1,4 +1,4 @@
-# cUtils
+# UtitlityClang
 
 目的為適用於嵌入式平台的純 C 語言通用 lib
 
@@ -10,10 +10,11 @@
 git submodule add <url> <path>
 ```
 
-- 複製 `utility_config.h.example` 為 `utility_config.h`，並根據需求修改
+- 添加下列 `git config` 配置，使 `USER_CODE` 的部分內容不會被 `git` 追蹤
 
 ```shell
-cp utility_config.h.example utility_config.h
+git config --local filter.gitignore.clean "sed '/\/\/ #USER_CODE_BEGIN/,/\/\/ #USER_CODE_END/d'"
+git config --local filter.gitignore.smudge cat
 ```
 
 ### Appendix
