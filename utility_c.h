@@ -21,9 +21,12 @@ extern "C" {
 #include <stdint.h>
 #include <stdio.h>
 
+/*  */
+#include "utility_config.h"
+/*  */
+
 #include "arm_c.h"
 #include "math_c.h"
-#include "utility_config.h"
 
 /* Exported types ------------------------------------------------------------*/
 
