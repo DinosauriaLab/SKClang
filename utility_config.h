@@ -24,17 +24,43 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 
+// #USER_CODE_BEGIN
+
+// #USER_CODE_END
+
 /* Exported types ------------------------------------------------------------*/
+
+// #USER_CODE_BEGIN
+
+// #USER_CODE_END
 
 /* Exported constants --------------------------------------------------------*/
 
+// #USER_CODE_BEGIN
+
+// #USER_CODE_END
+
 /* Exported macro ------------------------------------------------------------*/
 
-#define MAX_DELAY_US             0xFFFFFFFF /* Please define the max delay time in us */
-#define TINY_DELAY(microseconds)            /* Please define the delay function in us */
-#define UART_SEND_CHAR(x)                   /* Please define the send char function */
+/**
+ * @brief Please define the macro between #USER_CODE_BEGIN and #USER_CODE_END if you want to use it.
+ *
+ * @note We recommend that you can define these macros:
+ *
+ *       #define MAX_DELAY_US             0xFFFFFFFF
+ *       #define TINY_DELAY(microseconds)
+ *       #define UART_SEND_CHAR(x)
+ *
+ */
+// #USER_CODE_BEGIN
+
+// #USER_CODE_END
 
 /* Exported functions prototypes ---------------------------------------------*/
+
+// #USER_CODE_BEGIN
+
+// #USER_CODE_END
 
 #ifdef __cplusplus
 }
