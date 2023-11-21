@@ -25,19 +25,19 @@ extern "C" {
 #include <string.h>
 
 // #USER_CODE_BEGIN
- 
+
 // #USER_CODE_END
 
 /* Exported types ------------------------------------------------------------*/
 
 // #USER_CODE_BEGIN
- 
+
 // #USER_CODE_END
 
 /* Exported constants --------------------------------------------------------*/
 
 // #USER_CODE_BEGIN
- 
+
 // #USER_CODE_END
 
 /* Exported macro ------------------------------------------------------------*/
@@ -53,13 +53,13 @@ extern "C" {
  *
  */
 // #USER_CODE_BEGIN
- 
+
 // #USER_CODE_END
 
 /* Exported functions prototypes ---------------------------------------------*/
 
 // #USER_CODE_BEGIN
- 
+
 // #USER_CODE_END
 
 #ifdef __cplusplus
