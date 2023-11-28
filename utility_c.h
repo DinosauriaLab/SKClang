@@ -20,6 +20,7 @@ extern "C" {
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 /*  */
 #include "utility_config.h"
@@ -34,10 +35,34 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 
+#ifndef UNUSED
+#define UNUSED(x) (void)(x)
+#endif
+
+/*  */
+
 #define StringTrueFalse(x) ((x) ? "true" : "false")
+
+/*  */
 
 #define BUILD_DATE_TIME    (__DATE__ " @ " __TIME__)  // "Sep 21 2018 @ 11:00:00"
 #define HEX2ASCII(x)       ((x) < 10 ? (x) + '0' : (x)-10 + 'A')
+
+/*  */
+
+#if defined(__GNUC__)
+#define strlwr(x)                              \
+    do {                                       \
+        char* p = (x);                         \
+        while (*p != '\0') *p++ = tolower(*p); \
+    } while (0)
+
+#define strupr(x)                              \
+    do {                                       \
+        char* p = (x);                         \
+        while (*p != '\0') *p++ = toupper(*p); \
+    } while (0)
+#endif
 
 /* Exported functions prototypes ---------------------------------------------*/
 
