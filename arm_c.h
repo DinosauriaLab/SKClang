@@ -51,6 +51,11 @@ extern "C" {
 #define TINY_DELAY(microseconds)
 #endif
 
+#ifdef USE_FREE_RTOS
+#define delay_us(x)  vTaskDelay(1)
+#define delay_ms(x)  vTaskDelay(x)
+#define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
+#else
 #define delay_us(x)                   \
     do {                              \
         uint32_t _x = (x);            \
@@ -62,6 +67,7 @@ extern "C" {
     } while (0)
 #define delay_ms(x)  delay_us(MSEC_TO_USEC(x))
 #define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
+#endif  // USE_FREE_RTOS
 
 #ifndef UART_SEND_CHAR
 #define UART_SEND_CHAR(x)
