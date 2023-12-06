@@ -51,6 +51,22 @@ extern "C" {
 #define TINY_DELAY(microseconds)
 #endif
 
+#if USE_FREE_RTOS
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include "task.h"
+extern uint32_t SystemCoreClock;
+#define delay_ns(x)                                        \
+    {                                                      \
+        uint32_t ticks = SystemCoreClock * x / 1000000000; \
+        while (ticks--) {                                  \
+            asm("nop");                                    \
+        }                                                  \
+    }
+#define delay_us(x)  delay_ns(x * 1000)
+#define delay_ms(x)  vTaskDelay(pdMS_TO_TICKS(x))
+#define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
+#else
 #define delay_us(x)                   \
     do {                              \
         uint32_t _x = (x);            \
@@ -62,6 +78,7 @@ extern "C" {
     } while (0)
 #define delay_ms(x)  delay_us(MSEC_TO_USEC(x))
 #define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
+#endif  // USE_FREE_RTOS
 
 #ifndef UART_SEND_CHAR
 #define UART_SEND_CHAR(x)
