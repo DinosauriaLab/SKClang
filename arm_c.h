@@ -51,7 +51,7 @@ extern "C" {
 #define TINY_DELAY(microseconds)
 #endif
 
-#ifdef USE_FREE_RTOS
+#if USE_FREE_RTOS
 #include "task.h"
 #define delay_us(x)  vTaskDelay(1)
 #define delay_ms(x)  vTaskDelay(x)
