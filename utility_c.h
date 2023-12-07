@@ -27,6 +27,7 @@ extern "C" {
 /*  */
 
 #include "arm_c.h"
+#include "debug_c.h"
 #include "math_c.h"
 
 /* Exported types ------------------------------------------------------------*/

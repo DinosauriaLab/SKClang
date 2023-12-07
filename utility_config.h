@@ -50,6 +50,8 @@ extern "C" {
  *       #define MAX_DELAY_US             0xFFFFFFFF
  *       #define TINY_DELAY(microseconds)
  *       #define UART_SEND_CHAR(x)
+ *       #define DEBUG_LEVEL              DEBUG_LEVEL_INFO
+ *       #define USE_FREE_RTOS            0
  *
  */
 // #USER_CODE_BEGIN
