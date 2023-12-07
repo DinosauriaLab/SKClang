@@ -77,7 +77,7 @@ extern "C" {
 #endif
 
 #if (DEBUG_LEVEL >= DEBUG_LEVEL_INFO)
-#define DEBUG_LOG_INFO(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#define DEBUG_LOG_INFO(fmt, ...) printf(NONE "[INFO] " NONE fmt, ##__VA_ARGS__)
 #else
 #define DEBUG_LOG_INFO(fmt, ...)
 #endif
