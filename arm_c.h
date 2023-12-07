@@ -52,6 +52,8 @@ extern "C" {
 #endif
 
 #if USE_FREE_RTOS
+#include "FreeRTOS.h"
+#include "semphr.h"
 #include "task.h"
 #define delay_us(x)  vTaskDelay(1)
 #define delay_ms(x)  vTaskDelay(x)
