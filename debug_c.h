@@ -65,21 +65,21 @@ extern "C" {
 #endif
 
 #if (DEBUG_LEVEL >= DEBUG_LEVEL_ERROR)
-#define DEBUG_ERROR(fmt, ...) printf(LIGHT_RED "[ERROR] " NONE fmt, ##__VA_ARGS__)
+#define DEBUG_LOG_ERROR(fmt, ...) printf(LIGHT_RED "[ERROR] " NONE fmt, ##__VA_ARGS__)
 #else
-#define DEBUG_ERROR(fmt, ...)
+#define DEBUG_LOG_ERROR(fmt, ...)
 #endif
 
 #if (DEBUG_LEVEL >= DEBUG_LEVEL_WARN)
-#define DEBUG_WARN(fmt, ...) printf(YELLOW "[WARN] " NONE fmt, ##__VA_ARGS__)
+#define DEBUG_LOG_WARN(fmt, ...) printf(YELLOW "[WARN] " NONE fmt, ##__VA_ARGS__)
 #else
-#define DEBUG_WARN(fmt, ...)
+#define DEBUG_LOG_WARN(fmt, ...)
 #endif
 
 #if (DEBUG_LEVEL >= DEBUG_LEVEL_INFO)
-#define DEBUG(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#define DEBUG_LOG_INFO(fmt, ...) printf(NONE "[INFO] " NONE fmt, ##__VA_ARGS__)
 #else
-#define DEBUG(fmt, ...)
+#define DEBUG_LOG_INFO(fmt, ...)
 #endif
 
 #ifdef __cplusplus

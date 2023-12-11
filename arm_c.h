@@ -51,9 +51,20 @@ extern "C" {
 #define TINY_DELAY(microseconds)
 #endif
 
-#ifdef USE_FREE_RTOS
-#define delay_us(x)  vTaskDelay(1)
-#define delay_ms(x)  vTaskDelay(x)
+#if USE_FREE_RTOS
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include "task.h"
+extern uint32_t SystemCoreClock;
+#define delay_ns(x)                                        \
+    {                                                      \
+        uint32_t ticks = SystemCoreClock * x / 1000000000; \
+        while (ticks--) {                                  \
+            asm("nop");                                    \
+        }                                                  \
+    }
+#define delay_us(x)  delay_ns(x * 1000)
+#define delay_ms(x)  vTaskDelay(pdMS_TO_TICKS(x))
 #define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
 #else
 #define delay_us(x)                   \
