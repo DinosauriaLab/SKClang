@@ -25,7 +25,7 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 
-#if !defines(__ARM_ARCH)
+#if !defined(__ARM_ARCH)
 #include <assert.h>
 #include <limits.h>
 #include <termcap.h> /* tgetent, tgetnum */
@@ -148,7 +148,7 @@ void statusbar_finish(statusbar *bar) {
     return;
 }
 
-#if !defines(__ARM_ARCH)
+#if !defined(__ARM_ARCH)
 ///  How wide we assume the screen is if termcap fails.
 enum { DEFAULT_SCREEN_WIDTH = 80 };
 /// The smallest that the bar can ever be (not including borders)
