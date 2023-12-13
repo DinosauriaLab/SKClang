@@ -62,25 +62,25 @@ extern "C" {
 #pragma region Exported Functions
 
 statusbar *statusbar_new_with_format(const char *label, const char *format) {
-    statusbar *new = malloc(sizeof(statusbar));
-    if (new == NULL) {
+    statusbar *bar = (statusbar *)malloc(sizeof(statusbar));
+    if (bar == NULL) {
         return NULL;
     }
 
-    new->label         = label;
-    new->start_time    = time(0);
-    new->format_length = strlen(format);
-    new->format        = malloc(sizeof(char) * (new->format_length + 1));
-    if (new->format == NULL) {
-        free(new);
+    bar->label         = label;
+    bar->start_time    = time(0);
+    bar->format_length = strlen(format);
+    bar->format        = (char *)malloc(sizeof(char) * (bar->format_length + 1));
+    if (bar->format == NULL) {
+        free(bar);
         return NULL;
     }
 
-    strncpy(new->format, format, new->format_length);
-    new->format_index = 0;
-    new->last_printed = 0;
+    strncpy(bar->format, format, bar->format_length);
+    bar->format_index = 0;
+    bar->last_printed = 0;
 
-    return new;
+    return bar;
 }
 
 statusbar *statusbar_new(const char *label) {
