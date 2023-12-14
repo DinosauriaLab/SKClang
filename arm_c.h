@@ -34,7 +34,15 @@ extern "C" {
 #define SEC_TO_MSEC(x)  ((x) * 1000)     // second to millisecond
 #define SEC_TO_USEC(x)  ((x) * 1000000)  // second to microsecond
 
-#ifdef __ARM_ARCH
+/**
+ * __ARM_ARCH_6M__     : Cortex-M0, Cortex-M0+, Cortex-M1
+ * __ARM_ARCH_7M__     : Cortex-M3
+ * __ARM_ARCH_7EM__    : Cortex-M4, Cortex-M7
+ * __ARM_ARCH_8M_BASE__: Cortex-M23
+ * __ARM_ARCH_8M_MAIN__: Cortex-M33
+ */
+#if defined(__ARM_ARCH_6M__) || defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || \
+    defined(__ARM_ARCH_8M_BASE__) || defined(__ARM_ARCH_8M_MAIN__)
 
 #define SYS_TICK_START()      \
     SysTick->LOAD = 0xFFFFFF; \
@@ -100,7 +108,7 @@ static inline int _write(int fd, char *ptr, int len) {
 }
 #endif  // DEBUG
 
-#endif  // __ARM_ARCH
+#endif  // __ARM_ARCH_6M__ || __ARM_ARCH_7M__ || __ARM_ARCH_7EM__ || __ARM_ARCH_8M_BASE__ || __ARM_ARCH_8M_MAIN__
 
 /* Exported functions prototypes ---------------------------------------------*/
 
