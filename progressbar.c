@@ -176,23 +176,23 @@ static void progressbar_draw(const progressbar *bar);
  * bar like "<---------->". Returns NULL if there isn't enough memory to allocate a progressbar
  */
 progressbar *progressbar_new_with_format(const char *label, unsigned long max, const char *format) {
-    progressbar *new = malloc(sizeof(progressbar));
-    if (new == NULL) {
+    progressbar *bar = (progressbar *)malloc(sizeof(progressbar));
+    if (bar == NULL) {
         return NULL;
     }
 
-    new->max   = max;
-    new->value = 0;
-    new->start = time(NULL);
+    bar->max   = max;
+    bar->value = 0;
+    bar->start = time(NULL);
     assert(3 == strlen(format) && "format must be 3 characters in length");
-    new->format.begin = format[0];
-    new->format.fill  = format[1];
-    new->format.end   = format[2];
+    bar->format.begin = format[0];
+    bar->format.fill  = format[1];
+    bar->format.end   = format[2];
 
-    progressbar_update_label(new, label);
-    progressbar_draw(new);
+    progressbar_update_label(bar, label);
+    progressbar_draw(bar);
 
-    return new;
+    return bar;
 }
 
 /**
