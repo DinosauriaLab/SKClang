@@ -18,16 +18,15 @@ extern "C" {
 /*  */
 #pragma region includes
 
+#include <assert.h>
+#include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#if !defined(__ARM_ARCH)
-#include <assert.h>
-#include <limits.h>
+#if defined(__unix__) || defined(__unix) || defined(unix) || (defined(__APPLE__) && defined(__MACH__))
 #include <termcap.h> /* tgetent, tgetnum */
 #endif
 
@@ -62,25 +61,25 @@ extern "C" {
 #pragma region Exported Functions
 
 statusbar *statusbar_new_with_format(const char *label, const char *format) {
-    statusbar *new = malloc(sizeof(statusbar));
-    if (new == NULL) {
+    statusbar *bar = (statusbar *)malloc(sizeof(statusbar));
+    if (bar == NULL) {
         return NULL;
     }
 
-    new->label         = label;
-    new->start_time    = time(0);
-    new->format_length = strlen(format);
-    new->format        = malloc(sizeof(char) * (new->format_length + 1));
-    if (new->format == NULL) {
-        free(new);
+    bar->label         = label;
+    bar->start_time    = time(0);
+    bar->format_length = strlen(format);
+    bar->format        = (char *)malloc(sizeof(char) * (bar->format_length + 1));
+    if (bar->format == NULL) {
+        free(bar);
         return NULL;
     }
 
-    strncpy(new->format, format, new->format_length);
-    new->format_index = 0;
-    new->last_printed = 0;
+    strncpy(bar->format, format, bar->format_length);
+    bar->format_index = 0;
+    bar->last_printed = 0;
 
-    return new;
+    return bar;
 }
 
 statusbar *statusbar_new(const char *label) {
@@ -148,7 +147,6 @@ void statusbar_finish(statusbar *bar) {
     return;
 }
 
-#if !defined(__ARM_ARCH)
 ///  How wide we assume the screen is if termcap fails.
 enum { DEFAULT_SCREEN_WIDTH = 80 };
 /// The smallest that the bar can ever be (not including borders)
@@ -243,9 +241,12 @@ static int progressbar_max(int x, int y) {
 
 static unsigned int get_screen_width(void) {
     char termbuf[2048];
+#if defined(__unix__) || defined(__unix) || defined(unix) || (defined(__APPLE__) && defined(__MACH__))
     if (tgetent(termbuf, getenv("TERM")) >= 0) {
         return tgetnum("co") /* -2 */;
-    } else {
+    } else
+#endif
+    {
         return DEFAULT_SCREEN_WIDTH;
     }
 }
@@ -335,7 +336,6 @@ void progressbar_finish(progressbar *bar) {
     // We've finished with this progressbar, so go ahead and free it.
     progressbar_free(bar);
 }
-#endif
 
 #pragma endregion Exported Functions
 
