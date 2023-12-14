@@ -40,7 +40,7 @@ typedef struct _statusbar_t {
     char *format;
     int last_printed;
 } statusbar;
-#if !defined(__ARM_ARCH)
+
 typedef struct _progressbar_t {
     /// maximum value
     unsigned long max;
@@ -61,7 +61,6 @@ typedef struct _progressbar_t {
         char end;
     } format;
 } progressbar;
-#endif
 
 #pragma endregion typedef
 
@@ -92,7 +91,6 @@ void statusbar_finish(statusbar *bar);
 /// as it's called internally by *statusbar_inc*.
 void statusbar_draw(statusbar *bar);
 
-#if !defined(__ARM_ARCH)
 /// Create a new progressbar with the specified label and number of steps.
 ///
 /// @param label The label that will prefix the progressbar.
@@ -134,7 +132,6 @@ void progressbar_update_label(progressbar *bar, const char *label);
 /// Finalize (and free!) a progressbar. Call this when you're done, or if you break out
 /// partway through.
 void progressbar_finish(progressbar *bar);
-#endif
 
 #pragma endregion Exported Functions
 
