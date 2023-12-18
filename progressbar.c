@@ -240,8 +240,8 @@ static int progressbar_max(int x, int y) {
 }
 
 static unsigned int get_screen_width(void) {
-    char termbuf[2048];
 #if defined(__unix__) || defined(__unix) || defined(unix) || (defined(__APPLE__) && defined(__MACH__))
+    char termbuf[2048];
     if (tgetent(termbuf, getenv("TERM")) >= 0) {
         return tgetnum("co") /* -2 */;
     } else
