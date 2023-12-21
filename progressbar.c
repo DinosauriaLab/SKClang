@@ -9,6 +9,8 @@
  *
  */
 
+#if (INCLUDE_progressbar == 1)
+
 #include "progressbar.h"
 
 #ifdef __cplusplus
@@ -347,3 +349,5 @@ void progressbar_finish(progressbar *bar) {
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* INCLUDE_progressbar */

@@ -53,6 +53,8 @@ extern "C" {
  *       #define DEBUG_LEVEL              DEBUG_LEVEL_INFO
  *       #define USE_FREE_RTOS            0
  *
+ *       #INCLUDE_progressbar             1
+ *
  */
 // #USER_CODE_BEGIN
 
