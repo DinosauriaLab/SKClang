@@ -1,5 +1,5 @@
 /**
- * @file arm_c.h
+ * @file sk_arm.h
  * @author leoli (leo.li@viewsec.com)
  * @brief
  * @version 0.1
@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef __ARM_C_H
-#define __ARM_C_H
+#ifndef __SK_ARM_H
+#define __SK_ARM_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,10 +30,6 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 
-#define MSEC_TO_USEC(x) ((x) * 1000)     // millisecond to microsecond
-#define SEC_TO_MSEC(x)  ((x) * 1000)     // second to millisecond
-#define SEC_TO_USEC(x)  ((x) * 1000000)  // second to microsecond
-
 /**
  * __ARM_ARCH_6M__     : Cortex-M0, Cortex-M0+, Cortex-M1
  * __ARM_ARCH_7M__     : Cortex-M3
@@ -51,42 +47,17 @@ extern "C" {
 #define SYS_TICK_STOP()  (SysTick->CTRL = 0)
 #define SYS_TICK_COUNT() (SysTick->VAL)
 
-#ifndef MAX_DELAY_US
-#define MAX_DELAY_US (0xFFFFFFFFU)
-#endif
-
-#ifndef TINY_DELAY
-#define TINY_DELAY(microseconds)
-#endif
-
-#if USE_FREE_RTOS
-#include "FreeRTOS.h"
-#include "semphr.h"
-#include "task.h"
 extern uint32_t SystemCoreClock;
-#define delay_ns(x)                                        \
-    {                                                      \
-        uint32_t ticks = SystemCoreClock * x / 1000000000; \
-        while (ticks--) {                                  \
-            asm("nop");                                    \
-        }                                                  \
+#define delay_ns(x)                                                \
+    {                                                              \
+        uint32_t ticks = (SystemCoreClock / 1000000) * (x / 1000); \
+        while (ticks--) {                                          \
+            __NOP();                                               \
+        }                                                          \
     }
 #define delay_us(x)  delay_ns(x * 1000)
-#define delay_ms(x)  vTaskDelay(pdMS_TO_TICKS(x))
-#define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
-#else
-#define delay_us(x)                   \
-    do {                              \
-        uint32_t _x = (x);            \
-        while (_x > MAX_DELAY_US) {   \
-            TINY_DELAY(MAX_DELAY_US); \
-            _x -= MAX_DELAY_US;       \
-        }                             \
-        TINY_DELAY(_x);               \
-    } while (0)
-#define delay_ms(x)  delay_us(MSEC_TO_USEC(x))
-#define delay_sec(x) delay_ms(SEC_TO_MSEC(x))
-#endif  // USE_FREE_RTOS
+#define delay_ms(x)  delay_us(x * 1000)
+#define delay_sec(x) delay_ms(x * 1000)
 
 #ifndef UART_SEND_CHAR
 #define UART_SEND_CHAR(x)
@@ -116,4 +87,4 @@ static inline int _write(int fd, char *ptr, int len) {
 }
 #endif
 
-#endif  // __ARM_C_H
+#endif  // __SK_ARM_H

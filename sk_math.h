@@ -1,5 +1,5 @@
 /**
- * @file math_c.h
+ * @file sk_math.h
  * @author leoli (leo.li@viewsec.com)
  * @brief
  * @version 0.1
@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef __MATH_C_H
-#define __MATH_C_H
+#ifndef __SK_MATH_H
+#define __SK_MATH_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -115,4 +115,4 @@ extern "C" {
 }
 #endif
 
-#endif  // __MATH_C_H
+#endif  // __SK_MATH_H

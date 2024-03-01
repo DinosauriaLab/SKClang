@@ -12,6 +12,8 @@
 #ifndef __PROGRESSBAR_H
 #define __PROGRESSBAR_H
 
+#if (INCLUDE_progressbar == 1)
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -138,5 +140,7 @@ void progressbar_finish(progressbar *bar);
 #ifdef __cplusplus
 }
 #endif
+
+#endif  // INCLUDE_progressbar
 
 #endif  // __PROGRESSBAR_H
