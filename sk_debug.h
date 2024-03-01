@@ -1,5 +1,5 @@
 /**
- * @file debug_c.h
+ * @file sk_debug.h
  * @author leoli (jafee201153@gmail.com)
  * @brief
  * @version 0.1
@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef __DEBUG_C_H
-#define __DEBUG_C_H
+#ifndef __SK_DEBUG_H
+#define __SK_DEBUG_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -86,4 +86,4 @@ extern "C" {
 }
 #endif
 
-#endif  // __DEBUG_C_H
+#endif  // __SK_DEBUG_H

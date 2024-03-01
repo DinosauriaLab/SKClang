@@ -1,5 +1,5 @@
 /**
- * @file utility_c.h
+ * @file sk_common.h
  * @author leoli (jafee201153@gmail.com)
  * @brief
  * @version 0.1
@@ -9,8 +9,8 @@
  *
  */
 
-#ifndef __UTILITY_C_H
-#define __UTILITY_C_H
+#ifndef __SK_COMMON_H
+#define __SK_COMMON_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -22,14 +22,10 @@ extern "C" {
 #include <stdio.h>
 #include <string.h>
 
-/*  */
-#include "utility_config.h"
-/*  */
-
-#include "arm_c.h"
-#include "debug_c.h"
-#include "math_c.h"
 #include "progressbar.h"
+#include "sk_arm.h"
+#include "sk_debug.h"
+#include "sk_math.h"
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -56,4 +52,4 @@ extern "C" {
 }
 #endif
 
-#endif  // __UTILITY_C_H
+#endif  // __SK_COMMON_H
