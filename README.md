@@ -35,3 +35,7 @@ git submodule update --init --recursive
 git config --local filter.gitignore.clean "sed '/\/\/ #USER_CODE_BEGIN/,/\/\/ #USER_CODE_END/{//!d;};/\/\/ #USER_CODE_BEGIN/a\\'"
 git config --local filter.gitignore.smudge cat
 ```
+
+### 參考連結
+
+- https://github.com/doches/progressbar
