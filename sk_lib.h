@@ -1,5 +1,5 @@
 /**
- * @file sk_common.h
+ * @file sk_lib.h
  * @author leoli (jafee201153@gmail.com)
  * @brief
  * @version 0.1
@@ -45,6 +45,9 @@ extern "C" {
 
 #define BUILD_DATE_TIME    (__DATE__ " @ " __TIME__)  // "Sep 21 2018 @ 11:00:00"
 #define HEX2ASCII(x)       ((x) < 10 ? (x) + '0' : (x)-10 + 'A')
+
+#define STRINGIFY(x)       #x
+#define TOSTRING(x)        STRINGIFY(x)
 
 /* Exported functions prototypes ---------------------------------------------*/
 
