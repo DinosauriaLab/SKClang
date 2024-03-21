@@ -24,7 +24,6 @@ extern "C" {
 
 #include "progressbar.h"
 #include "sk_arm.h"
-#include "sk_debug.h"
 #include "sk_math.h"
 
 /* Exported types ------------------------------------------------------------*/
