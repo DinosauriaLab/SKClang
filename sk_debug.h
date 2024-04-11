@@ -61,38 +61,35 @@ extern "C" {
 #define DEBUG_LEVEL DEBUG_LEVEL_NONE
 #endif
 
-#ifndef DEBUG_NAME
-#define DEBUG_NAME "DEBUG"
-#endif
-
 #define DEBUG_Printf(fmt, ...) printf(fmt, ##__VA_ARGS__)
 
 #if (DEBUG_LEVEL >= DEBUG_LEVEL_ERROR)
-#define DEBUG_LOG_ERROR(fmt, ...) printf(LIGHT_RED                     \
-                                         "[E] "                        \
-                                         "[" DEBUG_NAME "] " NONE fmt, \
+#define DEBUG_LOG_ERROR(fmt, ...) printf(LIGHT_RED        \
+                                         "[E] " NONE fmt, \
                                          ##__VA_ARGS__)
 #else
 #define DEBUG_LOG_ERROR(fmt, ...)
 #endif
 
 #if (DEBUG_LEVEL >= DEBUG_LEVEL_WARN)
-#define DEBUG_LOG_WARN(fmt, ...) printf(YELLOW                        \
-                                        "[W] "                        \
-                                        "[" DEBUG_NAME "] " NONE fmt, \
+#define DEBUG_LOG_WARN(fmt, ...) printf(YELLOW           \
+                                        "[W] " NONE fmt, \
                                         ##__VA_ARGS__)
 #else
 #define DEBUG_LOG_WARN(fmt, ...)
 #endif
 
 #if (DEBUG_LEVEL >= DEBUG_LEVEL_INFO)
-#define DEBUG_LOG_INFO(fmt, ...) printf(NONE                          \
-                                        "[I] "                        \
-                                        "[" DEBUG_NAME "] " NONE fmt, \
+#define DEBUG_LOG_INFO(fmt, ...) printf(NONE             \
+                                        "[I] " NONE fmt, \
                                         ##__VA_ARGS__)
 #else
 #define DEBUG_LOG_INFO(fmt, ...)
 #endif
+
+#define PRINT_Info(fmt, ...)  DEBUG_LOG_INFO("[line: %3d, func: %-20s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
+#define PRINT_Warn(fmt, ...)  DEBUG_LOG_WARN("[line: %3d, func: %-20s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
+#define PRINT_Error(fmt, ...) DEBUG_LOG_ERROR("[line: %3d, func: %-20s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
 
 #ifdef __cplusplus
 }
