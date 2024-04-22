@@ -30,6 +30,9 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 
+#define TO_DEG(x) (x * 57.2957795131f)  // 1do/rad
+#define RAD_2_DEG 57.29578              // [deg/rad]
+
 #ifndef MAX
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #endif

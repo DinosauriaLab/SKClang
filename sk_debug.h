@@ -61,8 +61,6 @@ extern "C" {
 #define DEBUG_LEVEL DEBUG_LEVEL_NONE
 #endif
 
-#define DEBUG_Printf(fmt, ...) printf(fmt, ##__VA_ARGS__)
-
 #if (DEBUG_LEVEL >= DEBUG_LEVEL_ERROR)
 #define DEBUG_LOG_ERROR(fmt, ...) printf(LIGHT_RED        \
                                          "[E] " NONE fmt, \
@@ -87,9 +85,10 @@ extern "C" {
 #define DEBUG_LOG_INFO(fmt, ...)
 #endif
 
-#define PRINT_Info(fmt, ...)  DEBUG_LOG_INFO("[line: %3d, func: %-20s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
-#define PRINT_Warn(fmt, ...)  DEBUG_LOG_WARN("[line: %3d, func: %-20s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
-#define PRINT_Error(fmt, ...) DEBUG_LOG_ERROR("[line: %3d, func: %-20s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
+#define PRINT_Debug(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#define PRINT_Info(fmt, ...)  DEBUG_LOG_INFO("[line: %3d, func: %-25.25s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
+#define PRINT_Warn(fmt, ...)  DEBUG_LOG_WARN("[line: %3d, func: %-25.25s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
+#define PRINT_Error(fmt, ...) DEBUG_LOG_ERROR("[line: %3d, func: %-25.25s] " fmt, __LINE__, __func__, ##__VA_ARGS__)
 
 #ifdef __cplusplus
 }
