@@ -59,26 +59,6 @@ extern uint32_t SystemCoreClock;
 #define delay_ms(x)  delay_us(x * 1000)
 #define delay_sec(x) delay_ms(x * 1000)
 
-#ifndef UART_SEND_CHAR
-#define UART_SEND_CHAR(x)
-#endif
-
-#ifdef DEBUG
-static inline int _write(int fd, char *ptr, int len) {
-    (void)fd;
-    for (int i = 0; i < len; i++) {
-        UART_SEND_CHAR(ptr[i]);
-    }
-    return len;
-}
-#else
-static inline int _write(int fd, char *ptr, int len) {
-    (void)fd;
-    (void)ptr;
-    return len;  // 或者返回未使用参数len以避免警告
-}
-#endif  // DEBUG
-
 #endif  // __ARM_ARCH_6M__ || __ARM_ARCH_7M__ || __ARM_ARCH_7EM__ || __ARM_ARCH_8M_BASE__ || __ARM_ARCH_8M_MAIN__
 
 /* Exported functions prototypes ---------------------------------------------*/
