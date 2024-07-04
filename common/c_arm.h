@@ -1,16 +1,16 @@
 /**
- * @file sk_arm.h
- * @author leoli (leo.li@viewsec.com)
+ * @file c_arm.h
+ * @author leoli (jafee201153@gmail.com)
  * @brief
  * @version 0.1
- * @date 2023-11-16
+ * @date 2024-07-04
  *
- * @copyright Copyright (c) 2023
+ * @copyright Copyright (c) 2024
  *
  */
 
-#ifndef __SK_ARM_H
-#define __SK_ARM_H
+#ifndef __C_ARM_H
+#define __C_ARM_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,6 +23,8 @@ extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "cmodule_config.h"
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -47,17 +49,14 @@ extern "C" {
 #define SYS_TICK_STOP()  (SysTick->CTRL = 0)
 #define SYS_TICK_COUNT() (SysTick->VAL)
 
-extern uint32_t SystemCoreClock;
-#define delay_ns(x)                                                \
-    {                                                              \
-        uint32_t ticks = (SystemCoreClock / 1000000) * (x / 1000); \
-        while (ticks--) {                                          \
-            __NOP();                                               \
-        }                                                          \
+#ifndef delay_us
+#error "delay_us() is not defined"
+#else
+#define delay_ms(ms)    \
+    while (ms--) {      \
+        delay_us(1000); \
     }
-#define delay_us(x)  delay_ns(x * 1000)
-#define delay_ms(x)  delay_us(x * 1000)
-#define delay_sec(x) delay_ms(x * 1000)
+#endif
 
 #endif  // __ARM_ARCH_6M__ || __ARM_ARCH_7M__ || __ARM_ARCH_7EM__ || __ARM_ARCH_8M_BASE__ || __ARM_ARCH_8M_MAIN__
 
@@ -67,4 +66,4 @@ extern uint32_t SystemCoreClock;
 }
 #endif
 
-#endif  // __SK_ARM_H
+#endif  // __C_ARM_H

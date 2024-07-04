@@ -1,16 +1,16 @@
 /**
- * @file sk_math.h
- * @author leoli (leo.li@viewsec.com)
+ * @file c_math.h
+ * @author leoli (jafee201153@gmail.com)
  * @brief
  * @version 0.1
- * @date 2023-11-16
+ * @date 2024-07-04
  *
- * @copyright Copyright (c) 2023
+ * @copyright Copyright (c) 2024
  *
  */
 
-#ifndef __SK_MATH_H
-#define __SK_MATH_H
+#ifndef __C_MATH_H
+#define __C_MATH_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -54,11 +54,11 @@ extern "C" {
 #endif
 
 #ifndef SWAP
-#define SWAP(a, b) \
-    do {           \
-        a ^= b;    \
-        b ^= a;    \
-        a ^= b;    \
+#define SWAP(a, b)                 \
+    do {                           \
+        __typeof__(a) temp = (a);  \
+        (a)                = (b);  \
+        (b)                = temp; \
     } while (0)
 #endif
 
@@ -67,25 +67,25 @@ extern "C" {
 #endif
 
 #ifndef ARRAY_INVERT
-#define ARRAY_INVERT(array, length)                \
-    do {                                           \
-        for (int i = 0; i < length / 2; i++) {     \
-            SWAP(array[i], array[length - i - 1]); \
-        }                                          \
+#define ARRAY_INVERT(array, length)                      \
+    do {                                                 \
+        for (int i = 0; i < (length) / 2; ++i) {         \
+            SWAP((array)[i], (array)[(length) - i - 1]); \
+        }                                                \
     } while (0)
 #endif
 
-#ifndef ARRAY_IS_ALL_ZERO
-#define ARRAY_IS_ALL_ZERO(array, length, type)    \
-    ({                                            \
-        bool is_all_zero = true;                  \
-        for (size_t i = 0; i < (length); ++i) {   \
-            if (((type*)(array))[i] != (type)0) { \
-                is_all_zero = false;              \
-                break;                            \
-            }                                     \
-        }                                         \
-        is_all_zero;                              \
+#ifndef ARRAY_IS_EMPTY
+#define ARRAY_IS_EMPTY(array, length)           \
+    ({                                          \
+        bool is_empty = true;                   \
+        for (size_t i = 0; i < (length); ++i) { \
+            if ((array)[i] != 0) {              \
+                is_empty = false;               \
+                break;                          \
+            }                                   \
+        }                                       \
+        is_empty;                               \
     })
 #endif
 
@@ -118,4 +118,4 @@ extern "C" {
 }
 #endif
 
-#endif  // __SK_MATH_H
+#endif  // __C_MATH_H

@@ -1,16 +1,16 @@
 /**
- * @file sk_debug_level.h
+ * @file c_debug_level.h
  * @author leoli (jafee201153@gmail.com)
  * @brief
  * @version 0.1
- * @date 2024-03-20
+ * @date 2024-07-04
  *
  * @copyright Copyright (c) 2024
  *
  */
 
-#ifndef __SK_DEBUG_LEVEL_H
-#define __SK_DEBUG_LEVEL_H
+#ifndef __C_DEBUG_LEVEL_H
+#define __C_DEBUG_LEVEL_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -50,4 +50,4 @@ extern "C" {
 }
 #endif
 
-#endif  // __SK_DEBUG_LEVEL_H
+#endif  // __C_DEBUG_LEVEL_H

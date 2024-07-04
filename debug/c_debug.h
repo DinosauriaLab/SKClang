@@ -1,16 +1,16 @@
 /**
- * @file sk_debug.h
+ * @file c_debug.h
  * @author leoli (jafee201153@gmail.com)
  * @brief
  * @version 0.1
- * @date 2023-12-06
+ * @date 2024-07-04
  *
- * @copyright Copyright (c) 2023
+ * @copyright Copyright (c) 2024
  *
  */
 
-#ifndef __SK_DEBUG_H
-#define __SK_DEBUG_H
+#ifndef __C_DEBUG_H
+#define __C_DEBUG_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,7 +24,7 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 
-#include "sk_debug_level.h"
+#include "c_debug_level.h"
 
 /* Exported types ------------------------------------------------------------*/
 
@@ -94,4 +94,4 @@ extern "C" {
 }
 #endif
 
-#endif  // __SK_DEBUG_H
+#endif  // __C_DEBUG_H
