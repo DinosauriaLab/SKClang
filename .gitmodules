@@ -1,0 +1,3 @@
+[submodule "code/embed-console"]
+	path = code/embed-console
+	url = https://github.com/leoli0605/embed-console.git
