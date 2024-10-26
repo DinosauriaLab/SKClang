@@ -62,6 +62,9 @@ extern "C" {
     } while (0)
 #endif
 
+#define IS_ODD(x)  ((x) & 1)
+#define IS_EVEN(x) (!IS_ODD(x))
+
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #endif
